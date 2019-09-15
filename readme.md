@@ -12,6 +12,16 @@ These basic features include:
 6. Spring Profiles
 7. Enabled Configuration Properties
 8. Custom Exception Handler for error handling
+9. Logback
+
+## Swagger
+        http://localhost:8080/swagger-ui.html
+
+## Spring Actuator
+###### GET /actuator/health
+get status of application
+###### GET /actuator/info
+get git information of application
 
 ### POST /test
 
@@ -70,3 +80,4 @@ Date: Sun, 15 Sep 2019 08:11:18 GMT
     "explanation": "String"
 }
 ```
+

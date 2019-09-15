@@ -5,9 +5,19 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+/**
+ * The type Helpers.
+ */
 @Slf4j
 public class helpers {
 
+    /**
+     * Build fail response entity.
+     *
+     * @param be         the be
+     * @param httpStatus the http status
+     * @return the response entity
+     */
     public static ResponseEntity<BaseError> buildFailResponse(BaseError be, HttpStatus httpStatus) {
         ResponseEntity<BaseError> res =  ResponseEntity.status(httpStatus).body(be);
         log.error("failure response: {}", res);

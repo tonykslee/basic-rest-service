@@ -9,11 +9,22 @@ import org.springframework.util.StringUtils;
 
 import static com.tmobile.cns.acms.testservice3.utils.helpers.removeCountryCode;
 
+/**
+ * The type Test service.
+ */
 @Slf4j
 @Service
 public class TestService {
 
-    public TestResponse executeTest(TestRequest request) throws BadRequestException {
+    /**
+     * Execute test test response.
+     *
+     * @param request the request
+     * @return the test response
+     * @throws BadRequestException  the bad request exception
+     * @throws NullPointerException the null pointer exception
+     */
+    public TestResponse executeTest(TestRequest request) throws BadRequestException, NullPointerException {
         String msisdn = request.getMsisdn();
         if (StringUtils.isEmpty(msisdn)) throw new NullPointerException("Empty msisdn");
         if (removeCountryCode(msisdn).length() != 10) {

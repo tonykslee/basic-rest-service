@@ -35,17 +35,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
 //        web.ignoring()
 //                .antMatchers("/swagger-ui.html");
-//                .antMatchers("/health_check")
-//                .antMatchers("/info")
-//                .antMatchers("/swap")
-//                .antMatchers("/simswap")
-//                .antMatchers("/orchid/*");
-//                .antMatchers("/health") //if we omit /health from security, we don't get disk space info
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
+                .antMatchers("/testWithoutAuth").permitAll()
                 .anyRequest().authenticated()
                 .and().httpBasic().realmName(REALM)
                 .authenticationEntryPoint(authEntryPoint)
