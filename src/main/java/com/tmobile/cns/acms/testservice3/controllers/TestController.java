@@ -96,11 +96,15 @@ public class TestController {
         return response;
     }
 
+    /**
+     * Setup MDC variables.
+     *
+     * @param method the api endpoint that was called
+     */
     private void setupMDC(String method) {
         MDC.clear();
         MDC.put("method", method);
         MDC.put("workflow", "ACMS Example");
         MDC.put("transactionId", UUID.randomUUID().toString());
-
     }
 }
