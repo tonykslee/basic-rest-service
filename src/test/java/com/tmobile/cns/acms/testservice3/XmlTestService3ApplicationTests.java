@@ -13,13 +13,18 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.exceptions.base.MockitoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.spy;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.contains;
+import static org.mockito.Mockito.*;
 
 @Slf4j
 @RunWith(SpringRunner.class)
@@ -50,34 +55,67 @@ public class XmlTestService3ApplicationTests {
         assertEquals("helloWorld", testConstant);
     }
 
-//    @Test
+    @Test
     public void testControllerSuccess10digit() throws BadRequestException, PretendExternalApiFailureException {
         XmlTestRequest request = new XmlTestRequest();
         request.setMsisdn("1234567890");
-        XmlTestBaseResponse.XmlTestResponse response = testExternalService.executeExternalTest(request);
+
+        XmlTestBaseResponse baseResponse = new XmlTestBaseResponse();
+        XmlTestBaseResponse.XmlTestResponse testResponse = new XmlTestBaseResponse.XmlTestResponse();
+        testResponse.setStatus("Success");
+        baseResponse.setXmlTestResponse(testResponse);
+        doReturn(ResponseEntity.ok(baseResponse))
+                .when(restTemplate)
+                .exchange(contains("/external/xml/api"), any(), any(), (Class<Object>)any());
+
+        XmlTestBaseResponse.XmlTestResponse response = testController.executeTest(request);
         assertEquals("Success", response.getStatus());
     }
 
-//    @Test
+    @Test
     public void testControllerSuccess11digit() throws BadRequestException, PretendExternalApiFailureException {
         XmlTestRequest request = new XmlTestRequest();
         request.setMsisdn("11234567890");
-        XmlTestBaseResponse.XmlTestResponse response = testExternalService.executeExternalTest(request);
+
+        XmlTestBaseResponse baseResponse = new XmlTestBaseResponse();
+        XmlTestBaseResponse.XmlTestResponse testResponse = new XmlTestBaseResponse.XmlTestResponse();
+        testResponse.setStatus("Success");
+        baseResponse.setXmlTestResponse(testResponse);
+        doReturn(ResponseEntity.ok(baseResponse))
+                .when(restTemplate)
+                .exchange(contains("/external/xml/api"), any(), any(), (Class<Object>)any());
+
+        XmlTestBaseResponse.XmlTestResponse response = testController.executeTest(request);
         assertEquals("Success", response.getStatus());
     }
 
-//    @Test(expected = NullPointerException.class)
+    @Test(expected = PretendExternalApiFailureException.class)
     public void testControllerFailNullRequest() throws BadRequestException, PretendExternalApiFailureException {
         XmlTestRequest request = new XmlTestRequest();
         request.setMsisdn("");
-        testExternalService.executeExternalTest(request);
+
+        doThrow(new NullPointerException("Empty Msisdn"))
+                .when(restTemplate)
+                .exchange(contains("/external/xml/api"), any(), any(), (Class<Object>)any());
+        testController.executeTest(request);
     }
 
-//    @Test(expected = BadRequestException.class)
+    @Test(expected = BadRequestException.class)
     public void testControllerFailBadRequest() throws BadRequestException, PretendExternalApiFailureException {
         XmlTestRequest request = new XmlTestRequest();
         request.setMsisdn("123");
-        testExternalService.executeExternalTest(request);
+
+        XmlTestBaseResponse baseResponse = new XmlTestBaseResponse();
+        XmlTestBaseResponse.XmlTestErrorResponse errorResponse = new XmlTestBaseResponse.XmlTestErrorResponse();
+        errorResponse.setCode("4000");
+        errorResponse.setReason("Bad Request");
+        errorResponse.setExplanation("Bad Request");
+        baseResponse.setXmlTestErrorResponse(errorResponse);
+        doReturn(ResponseEntity.status(HttpStatus.BAD_REQUEST).body(baseResponse))
+                .when(restTemplate)
+                .exchange(contains("/external/xml/api"), any(), any(), (Class<Object>)any());
+
+        testController.executeTest(request);
     }
 
     @Test

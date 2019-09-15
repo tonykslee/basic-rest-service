@@ -1,5 +1,6 @@
 package com.tmobile.cns.acms.testservice3.services;
 
+import com.tmobile.cns.acms.testservice3.exceptions.BadRequestException;
 import com.tmobile.cns.acms.testservice3.exceptions.PretendExternalApiFailureException;
 import generated.XmlTestBaseResponse;
 import generated.XmlTestRequest;
@@ -32,7 +33,7 @@ public class TestExternalService {
      * @param request the request
      * @return the test external response
      */
-    public XmlTestBaseResponse.XmlTestResponse executeExternalTest(XmlTestRequest request) throws NullPointerException, PretendExternalApiFailureException {
+    public XmlTestBaseResponse.XmlTestResponse executeExternalTest(XmlTestRequest request) throws NullPointerException, PretendExternalApiFailureException, BadRequestException {
         if (request == null) throw new NullPointerException("Null External Request Body");
         long startTime = System.currentTimeMillis();
 
@@ -53,7 +54,7 @@ public class TestExternalService {
         }
 
         if (!response.getStatusCode().is2xxSuccessful()) {
-            throw new PretendExternalApiFailureException(response.getBody().toString());
+            throw new BadRequestException(response.getBody().getXmlTestErrorResponse().toString());
         }
         XmlTestBaseResponse.XmlTestResponse externalResponse = response.getBody().getXmlTestResponse();
         log.info("{} {} | {}ms | External API Response Body: {}",

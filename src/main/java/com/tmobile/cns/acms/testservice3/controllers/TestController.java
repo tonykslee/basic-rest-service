@@ -1,6 +1,7 @@
 package com.tmobile.cns.acms.testservice3.controllers;
 
 import com.tmobile.cns.acms.testservice3.entities.responses.BaseError;
+import com.tmobile.cns.acms.testservice3.exceptions.BadRequestException;
 import com.tmobile.cns.acms.testservice3.exceptions.PretendExternalApiFailureException;
 import com.tmobile.cns.acms.testservice3.services.TestExternalService;
 import generated.XmlTestBaseResponse;
@@ -58,7 +59,7 @@ public class TestController {
                             "2. Msisdn must be 10 or 11 digits long.",
                     response = BaseError.class)})
     @ResponseBody
-    public XmlTestBaseResponse.XmlTestResponse executeTest(@RequestBody XmlTestRequest request) throws NullPointerException, PretendExternalApiFailureException {
+    public XmlTestBaseResponse.XmlTestResponse executeTest(@RequestBody XmlTestRequest request) throws NullPointerException, PretendExternalApiFailureException, BadRequestException {
         setupMDC("/test");
         log.info("Initial Request Body: {}", request);
 
