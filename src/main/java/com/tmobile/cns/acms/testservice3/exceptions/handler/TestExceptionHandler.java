@@ -3,6 +3,7 @@ package com.tmobile.cns.acms.testservice3.exceptions.handler;
 
 import com.tmobile.cns.acms.testservice3.entities.responses.BaseError;
 import com.tmobile.cns.acms.testservice3.exceptions.BadRequestException;
+import com.tmobile.cns.acms.testservice3.exceptions.PretendExternalApiFailureException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import static com.tmobile.cns.acms.testservice3.utils.helpers.buildFailResponse;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 
 /**
  * The type Test exception handler.
@@ -41,5 +43,11 @@ public class TestExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<BaseError> handleNullRequestException(NullPointerException ex) {
         BaseError baseError = new BaseError("4001", "Null Request Field", ex.getMessage());
         return buildFailResponse(baseError, BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = {PretendExternalApiFailureException.class})
+    protected ResponseEntity<BaseError> handlePretendExternalApiFailureException(PretendExternalApiFailureException ex) {
+        BaseError baseError = new BaseError("4002", "call to pretend external api failed", ex.getMessage());
+        return buildFailResponse(baseError, INTERNAL_SERVER_ERROR);
     }
 }

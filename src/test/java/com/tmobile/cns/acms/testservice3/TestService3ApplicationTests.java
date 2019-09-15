@@ -5,11 +5,13 @@ import com.tmobile.cns.acms.testservice3.controllers.TestController;
 import com.tmobile.cns.acms.testservice3.entities.requests.TestRequest;
 import com.tmobile.cns.acms.testservice3.entities.responses.TestResponse;
 import com.tmobile.cns.acms.testservice3.exceptions.BadRequestException;
+import com.tmobile.cns.acms.testservice3.services.TestExternalService;
 import com.tmobile.cns.acms.testservice3.services.TestService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -26,11 +28,13 @@ public class TestService3ApplicationTests {
     ApplicationProperties properties;
     TestController testController;
     TestService testService;
+    @Mock
+    TestExternalService testExternalService;
 
     @Before
     public void setup() {
         testService = spy(new TestService());
-        testController = spy(new TestController(testService));
+        testController = spy(new TestController(testService, testExternalService));
 
     }
 
