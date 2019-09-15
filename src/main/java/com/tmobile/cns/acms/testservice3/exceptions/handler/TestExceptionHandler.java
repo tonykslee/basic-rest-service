@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import static com.tmobile.cns.acms.testservice3.utils.helpers.buildFailResponse;
@@ -25,10 +27,12 @@ public class TestExceptionHandler extends ResponseEntityExceptionHandler {
      * @param ex the ex
      * @return the response entity
      */
+    @ResponseBody
+    @ResponseStatus(BAD_REQUEST)
     @ExceptionHandler(value = {BadRequestException.class})
-    protected ResponseEntity<BaseError> handleBadRequestException(BadRequestException ex) {
+    protected BaseError handleBadRequestException(BadRequestException ex) {
         BaseError baseError = new BaseError("4000", "Bad Request", ex.getMessage());
-        return buildFailResponse(baseError, BAD_REQUEST);
+        return baseError;
     }
 
     /**
@@ -37,9 +41,11 @@ public class TestExceptionHandler extends ResponseEntityExceptionHandler {
      * @param ex the ex
      * @return the response entity
      */
+    @ResponseBody
+    @ResponseStatus(BAD_REQUEST)
     @ExceptionHandler(value = {NullPointerException.class})
-    protected ResponseEntity<BaseError> handleNullRequestException(NullPointerException ex) {
+    protected BaseError handleNullRequestException(NullPointerException ex) {
         BaseError baseError = new BaseError("4001", "Null Request Field", ex.getMessage());
-        return buildFailResponse(baseError, BAD_REQUEST);
+        return baseError;
     }
 }

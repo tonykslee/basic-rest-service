@@ -12,19 +12,6 @@ import org.springframework.http.ResponseEntity;
 public class helpers {
 
     /**
-     * Build fail response entity.
-     *
-     * @param be         the be
-     * @param httpStatus the http status
-     * @return the response entity
-     */
-    public static ResponseEntity<BaseError> buildFailResponse(BaseError be, HttpStatus httpStatus) {
-        ResponseEntity<BaseError> res =  ResponseEntity.status(httpStatus).body(be);
-        log.error("failure response: {}", res);
-        return res;
-    }
-
-    /**
      * This method removes the country code from the msisdn.
      *
      * @param msisdn original msisdn.
