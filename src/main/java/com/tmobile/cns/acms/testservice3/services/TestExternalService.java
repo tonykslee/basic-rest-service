@@ -23,10 +23,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Controller
 public class TestExternalService {
 
+    private RestTemplate restTemplate;
+
     @Autowired
-    PretendExternalApi pretendExternalApi;
-    @Autowired
-    RestTemplate restTemplate;
+    public TestExternalService(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
     /**
      * Pretend that this method executes a REST API call to an external service.

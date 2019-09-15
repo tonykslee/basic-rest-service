@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TestExternalResponse {
-    private String responseStatus;
+    private String status;
     private boolean isValidated;
 }
