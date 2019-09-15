@@ -16,8 +16,6 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 @ControllerAdvice
 public class TestExceptionHandler extends ResponseEntityExceptionHandler {
 
-    //other exception handlers
-
     @ExceptionHandler(value = {BadRequestException.class})
     protected ResponseEntity<BaseError> handleBadRequestException(BadRequestException ex) {
         BaseError baseError = new BaseError("4000", "Bad Request", ex.getMessage());
