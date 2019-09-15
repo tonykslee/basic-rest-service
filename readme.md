@@ -21,9 +21,9 @@ Please clone this repo to your run the code to see how it works. Play around wit
         http://localhost:8080/swagger-ui.html
 
 ## Spring Actuator
-###### GET `/actuator/health`
+##### GET `/actuator/health`
 get status of application
-###### GET `/actuator/info`
+##### GET `/actuator/info`
 get git information of application
 
 
