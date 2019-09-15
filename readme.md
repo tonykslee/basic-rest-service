@@ -18,12 +18,12 @@ These basic features include:
         http://localhost:8080/swagger-ui.html
 
 ## Spring Actuator
-###### GET /actuator/health
+###### GET `/actuator/health`
 get status of application
-###### GET /actuator/info
+###### GET `/actuator/info`
 get git information of application
 
-### POST /test
+### POST `/test`
 
 ###### curl Request
 ```
