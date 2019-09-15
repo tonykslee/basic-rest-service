@@ -44,6 +44,7 @@ public class MockExternalApiCallTest {
         TestExternalResponse mockResponse = new TestExternalResponse("Success", true);
         doReturn(mockResponse).when(testExternalService).executeExternalTest(any());
 
+
         TestExternalResponse response = testController.executeTestExternalApiCall(new TestExternalRequest(11));
         assertEquals("Success", response.getStatus());
     }
