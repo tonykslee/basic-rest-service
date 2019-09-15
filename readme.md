@@ -3,6 +3,8 @@ ACMS Example REST Service
 
 This application is an example REST API that ACMS REST services can be modeled after. It includes several basic features of a modern production level REST service.
 
+#### This branch features the most basic structure and framework for an average production level REST service
+
 These basic features include:
 1. Basic package structure
 2. Spring Security - Basic Authentication
