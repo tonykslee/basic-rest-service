@@ -17,6 +17,7 @@ These basic features include:
 
 <details>
     <summary>curl request/response</summary>
+    
     ###### Curl Request
     ```
     curl -i -X POST \
