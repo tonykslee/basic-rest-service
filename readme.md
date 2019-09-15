@@ -15,43 +15,38 @@ These basic features include:
 
 ### POST /test
 
-<details>
-    <summary>curl request/response</summary>
+###### curl Request
+```
+curl -i -X POST \
+  http://localhost:8080/test \
+  -H 'Accept: */*' \
+  -H 'Accept-Encoding: gzip, deflate' \
+  -H 'Authorization: Basic dGVzdDp0ZXN0MTAw' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Length: 27' \
+  -H 'Content-Type: application/json' \
+  -H 'Cookie: JSESSIONID=639473E390EE936177B1C7BEDEFFC42F' \
+  -H 'Host: localhost:8080' \
+  -H 'User-Agent: PostmanRuntime/7.16.3' \
+  -d '{
+	"msisdn": "1234567890"
+}'
+```
+###### curl Response
+```
+HTTP/1.1 200
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json;charset=UTF-8
+Transfer-Encoding: chunked
+Date: Sun, 15 Sep 2019 08:11:18 GMT
 
-    ###### Curl Request
-    ```
-    curl -i -X POST \
-      http://localhost:8080/test \
-      -H 'Accept: */*' \
-      -H 'Accept-Encoding: gzip, deflate' \
-      -H 'Authorization: Basic dGVzdDp0ZXN0MTAw' \
-      -H 'Connection: keep-alive' \
-      -H 'Content-Length: 27' \
-      -H 'Content-Type: application/json' \
-      -H 'Cookie: JSESSIONID=639473E390EE936177B1C7BEDEFFC42F' \
-      -H 'Host: localhost:8080' \
-      -H 'User-Agent: PostmanRuntime/7.16.3' \
-      -d '{
-        "msisdn": "1234567890"
-    }'
-    ```
-    ###### Response
-    ```
-    HTTP/1.1 200
-    X-Content-Type-Options: nosniff
-    X-XSS-Protection: 1; mode=block
-    Cache-Control: no-cache, no-store, max-age=0, must-revalidate
-    Pragma: no-cache
-    Expires: 0
-    X-Frame-Options: DENY
-    Content-Type: application/json;charset=UTF-8
-    Transfer-Encoding: chunked
-    Date: Sun, 15 Sep 2019 08:11:18 GMT
-    
-    {"status":"Success"}
-    ```
-</details>
-
+{"status":"Success"}
+```
 
 ###### Request Body
 ```
