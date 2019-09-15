@@ -1,10 +1,9 @@
 package com.tmobile.cns.acms.testservice3.controllers;
 
 import com.tmobile.cns.acms.testservice3.exceptions.BadRequestException;
-import com.tmobile.cns.acms.testservice3.services.XmlTestService;
-import generated.XmlTestErrorResponse;
+import com.tmobile.cns.acms.testservice3.external.api.XmlTestService;
+import generated.XmlTestBaseResponse;
 import generated.XmlTestRequest;
-import generated.XmlTestResponse;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -24,7 +23,7 @@ import java.util.UUID;
  */
 @Slf4j
 @Controller
-public class XmlTestController {
+public class PretendExternalXmlApi {
 
     private XmlTestService xmlTestService;
 
@@ -34,7 +33,7 @@ public class XmlTestController {
      * @param xmlTestService the test service
      */
     @Autowired
-    public XmlTestController(XmlTestService xmlTestService) {
+    public PretendExternalXmlApi(XmlTestService xmlTestService) {
         this.xmlTestService = xmlTestService;
     }
 
@@ -46,23 +45,23 @@ public class XmlTestController {
      * @throws BadRequestException  the bad request exception
      * @throws NullPointerException the null pointer exception
      */
-    @PostMapping(value = "/xmlTest",
+    @PostMapping(value = "/external/xml/api",
             produces = MediaType.APPLICATION_XML_VALUE,
             consumes = MediaType.APPLICATION_XML_VALUE)
-    @ApiOperation(value = "Execute basic test api",
+    @ApiOperation(value = "Execute XML test api",
             notes = "Send arbitrary msisdn and receive an arbitrary response",
-            response = XmlTestResponse.class)
+            response = XmlTestBaseResponse.XmlTestResponse.class)
     @ApiResponses(value = {
             @ApiResponse(code = 400, message =
                     "1. Empty msisdn\n" +
                             "2. Msisdn must be 10 or 11 digits long.",
-                    response = XmlTestErrorResponse.class)})
+                    response = XmlTestBaseResponse.XmlTestErrorResponse.class)})
     @ResponseBody
-    public XmlTestResponse executeTest(@RequestBody XmlTestRequest request) throws BadRequestException, NullPointerException {
-        setupMDC("/xmlTest");
+    public XmlTestBaseResponse.XmlTestResponse executeTest(@RequestBody XmlTestRequest request) throws BadRequestException, NullPointerException {
+        setupMDC("/external/xml/api");
         log.info("Initial Request Body: {}", request);
 
-        XmlTestResponse response = xmlTestService.executeTest(request);
+        XmlTestBaseResponse.XmlTestResponse response = xmlTestService.executeXmlTest(request);
         log.info("Returning Successful Response: {}", response);
         return response;
     }

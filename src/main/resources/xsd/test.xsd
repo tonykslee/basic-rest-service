@@ -6,21 +6,25 @@
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
-
-    <xsd:element name="XmlTestResponse">
+    <xsd:element name="XmlTestBaseResponse">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element name="status" type="xsd:string"/>
-            </xsd:sequence>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="XmlTestErrorResponse">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element name="code" type="xsd:string"/>
-                <xsd:element name="reason" type="xsd:string"/>
-                <xsd:element name="explanation" type="xsd:string"/>
+                <xsd:element name="XmlTestResponse">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="status" type="xsd:string"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="XmlTestErrorResponse">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="code" type="xsd:string"/>
+                            <xsd:element name="reason" type="xsd:string"/>
+                            <xsd:element name="explanation" type="xsd:string"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>

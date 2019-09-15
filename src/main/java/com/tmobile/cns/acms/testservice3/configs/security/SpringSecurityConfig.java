@@ -41,6 +41,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
                 .antMatchers("/testWithoutAuth").permitAll()
+                .antMatchers("/external/xml/api").permitAll()
                 .anyRequest().authenticated()
                 .and().httpBasic().realmName(REALM)
                 .authenticationEntryPoint(authEntryPoint)
