@@ -33,7 +33,7 @@ public class TestExceptionHandler extends ResponseEntityExceptionHandler {
      * @param httpStatus the http status
      * @return the response entity
      */
-    public static ResponseEntity<XmlTestBaseResponse.XmlTestErrorResponse> buildFailResponse(XmlTestBaseResponse.XmlTestErrorResponse error, HttpStatus httpStatus) {
+    public static ResponseEntity<XmlTestBaseResponse> buildFailResponse(XmlTestBaseResponse.XmlTestErrorResponse error, HttpStatus httpStatus) {
         XmlTestBaseResponse baseResponse = new XmlTestBaseResponse();
         baseResponse.setXmlTestErrorResponse(error);
         ResponseEntity res = ResponseEntity
@@ -56,7 +56,7 @@ public class TestExceptionHandler extends ResponseEntityExceptionHandler {
      */
     @ResponseStatus(value = BAD_REQUEST)
     @ExceptionHandler(value = {BadRequestException.class})
-    protected ResponseEntity<XmlTestBaseResponse.XmlTestErrorResponse> handleBadRequestException(BadRequestException ex, WebRequest wr) {
+    protected ResponseEntity<XmlTestBaseResponse> handleBadRequestException(BadRequestException ex, WebRequest wr) {
         XmlTestBaseResponse.XmlTestErrorResponse xmlTestErrorResponse = new XmlTestBaseResponse.XmlTestErrorResponse();
         xmlTestErrorResponse.setCode("4000");
         xmlTestErrorResponse.setReason("Bad Request");

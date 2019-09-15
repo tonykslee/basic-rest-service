@@ -44,7 +44,7 @@ public class TestExternalService {
                 .path("/api")
                 .build().toUriString();
         log.info("Calling External XML API | URL: {} | Request Body: {}", url, request);
-        ResponseEntity<XmlTestBaseResponse> response;
+        ResponseEntity<XmlTestBaseResponse> response = null;
         try {
             response = restTemplate.exchange(url, HttpMethod.POST, createHttpEntity(request), XmlTestBaseResponse.class);
         } catch (Exception e) {

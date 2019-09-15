@@ -57,13 +57,15 @@ public class PretendExternalXmlApi {
                             "2. Msisdn must be 10 or 11 digits long.",
                     response = XmlTestBaseResponse.XmlTestErrorResponse.class)})
     @ResponseBody
-    public XmlTestBaseResponse.XmlTestResponse executeTest(@RequestBody XmlTestRequest request) throws BadRequestException, NullPointerException {
+    public XmlTestBaseResponse executeTest(@RequestBody XmlTestRequest request) throws BadRequestException, NullPointerException {
         setupMDC("/external/xml/api");
         log.info("Initial Request Body: {}", request);
 
         XmlTestBaseResponse.XmlTestResponse response = xmlTestService.executeXmlTest(request);
-        log.info("Returning Successful Response: {}", response);
-        return response;
+        XmlTestBaseResponse baseResponse = new XmlTestBaseResponse();
+        baseResponse.setXmlTestResponse(response);
+        log.info("Returning Successful Response: {}", baseResponse);
+        return baseResponse;
     }
 
 
