@@ -1,0 +1,27 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="XmlTestRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="msisdn" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="XmlTestResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="status" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="XmlTestErrorResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="code" type="xsd:string"/>
+                <xsd:element name="reason" type="xsd:string"/>
+                <xsd:element name="explanation" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

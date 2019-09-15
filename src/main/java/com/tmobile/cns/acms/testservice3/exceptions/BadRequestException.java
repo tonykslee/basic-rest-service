@@ -1,9 +1,11 @@
 package com.tmobile.cns.acms.testservice3.exceptions;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
 /**
  * The type Bad request exception.
  */
-//@ResponseStatus(value = HttpStatus.BAD_REQUEST)
 public class BadRequestException extends Exception {
     /**
      * Instantiates a new Bad request exception.

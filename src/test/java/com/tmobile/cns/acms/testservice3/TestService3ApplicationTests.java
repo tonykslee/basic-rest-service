@@ -2,10 +2,10 @@ package com.tmobile.cns.acms.testservice3;
 
 import com.tmobile.cns.acms.testservice3.configs.ApplicationProperties;
 import com.tmobile.cns.acms.testservice3.controllers.TestController;
-import com.tmobile.cns.acms.testservice3.entities.requests.TestRequest;
-import com.tmobile.cns.acms.testservice3.entities.responses.TestResponse;
 import com.tmobile.cns.acms.testservice3.exceptions.BadRequestException;
 import com.tmobile.cns.acms.testservice3.services.TestService;
+import generated.XmlTestRequest;
+import generated.XmlTestResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,27 +43,31 @@ public class TestService3ApplicationTests {
 
     @Test
     public void testControllerSuccess10digit() throws BadRequestException {
-        TestRequest request = new TestRequest("1234567890");
-        TestResponse response = testController.executeTest(request);
+        XmlTestRequest request = new XmlTestRequest();
+        request.setMsisdn("1234567890");
+        XmlTestResponse response = testController.executeTest(request);
         assertEquals("Success", response.getStatus());
     }
 
     @Test
     public void testControllerSuccess11digit() throws BadRequestException {
-        TestRequest request = new TestRequest("11234567890");
-        TestResponse response = testController.executeTest(request);
+        XmlTestRequest request = new XmlTestRequest();
+        request.setMsisdn("11234567890");
+        XmlTestResponse response = testController.executeTest(request);
         assertEquals("Success", response.getStatus());
     }
 
     @Test(expected = NullPointerException.class)
     public void testControllerFailNullRequest() throws BadRequestException {
-        TestRequest request = new TestRequest("");
+        XmlTestRequest request = new XmlTestRequest();
+        request.setMsisdn("");
         testController.executeTest(request);
     }
 
     @Test(expected = BadRequestException.class)
     public void testControllerFailBadRequest() throws BadRequestException {
-        TestRequest request = new TestRequest("123");
+        XmlTestRequest request = new XmlTestRequest();
+        request.setMsisdn("123");
         testController.executeTest(request);
     }
 
