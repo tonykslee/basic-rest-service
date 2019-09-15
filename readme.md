@@ -17,17 +17,17 @@ These basic features include:
 ## Instructions
 Please clone this repo to your run the code to see how it works. Play around with it! Experiment with all the above noted features to get a deeper understanding of how they work so that you can confidently implement them into your own code. 
 
-## Swagger
+# Swagger
         http://localhost:8080/swagger-ui.html
 
-## Spring Actuator
+# Spring Actuator
 ##### GET `/actuator/health`
 get status of application
 ##### GET `/actuator/info`
 get git information of application
 
 
-## API Endpoints
+# API Endpoints
 
 #### POST `/test`
 
@@ -93,6 +93,8 @@ Date: Sun, 15 Sep 2019 08:11:18 GMT
     "explanation": "String"
 }
 ```
+
+---
 
 #### POST `/testWithoutAuth`
 
