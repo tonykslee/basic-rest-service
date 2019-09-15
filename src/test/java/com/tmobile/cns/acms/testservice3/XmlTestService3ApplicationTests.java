@@ -1,9 +1,9 @@
 package com.tmobile.cns.acms.testservice3;
 
 import com.tmobile.cns.acms.testservice3.configs.ApplicationProperties;
-import com.tmobile.cns.acms.testservice3.controllers.TestController;
+import com.tmobile.cns.acms.testservice3.controllers.XmlTestController;
 import com.tmobile.cns.acms.testservice3.exceptions.BadRequestException;
-import com.tmobile.cns.acms.testservice3.services.TestService;
+import com.tmobile.cns.acms.testservice3.services.XmlTestService;
 import generated.XmlTestRequest;
 import generated.XmlTestResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -20,17 +20,17 @@ import static org.mockito.Mockito.spy;
 @Slf4j
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class TestService3ApplicationTests {
+public class XmlTestService3ApplicationTests {
 
     @Autowired
     ApplicationProperties properties;
-    TestController testController;
-    TestService testService;
+    XmlTestController xmlTestController;
+    XmlTestService xmlTestService;
 
     @Before
     public void setup() {
-        testService = spy(new TestService());
-        testController = spy(new TestController(testService));
+        xmlTestService = spy(new XmlTestService());
+        xmlTestController = spy(new XmlTestController(xmlTestService));
 
     }
 
@@ -45,7 +45,7 @@ public class TestService3ApplicationTests {
     public void testControllerSuccess10digit() throws BadRequestException {
         XmlTestRequest request = new XmlTestRequest();
         request.setMsisdn("1234567890");
-        XmlTestResponse response = testController.executeTest(request);
+        XmlTestResponse response = xmlTestController.executeTest(request);
         assertEquals("Success", response.getStatus());
     }
 
@@ -53,7 +53,7 @@ public class TestService3ApplicationTests {
     public void testControllerSuccess11digit() throws BadRequestException {
         XmlTestRequest request = new XmlTestRequest();
         request.setMsisdn("11234567890");
-        XmlTestResponse response = testController.executeTest(request);
+        XmlTestResponse response = xmlTestController.executeTest(request);
         assertEquals("Success", response.getStatus());
     }
 
@@ -61,14 +61,14 @@ public class TestService3ApplicationTests {
     public void testControllerFailNullRequest() throws BadRequestException {
         XmlTestRequest request = new XmlTestRequest();
         request.setMsisdn("");
-        testController.executeTest(request);
+        xmlTestController.executeTest(request);
     }
 
     @Test(expected = BadRequestException.class)
     public void testControllerFailBadRequest() throws BadRequestException {
         XmlTestRequest request = new XmlTestRequest();
         request.setMsisdn("123");
-        testController.executeTest(request);
+        xmlTestController.executeTest(request);
     }
 
     @Test

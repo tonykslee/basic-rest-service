@@ -32,7 +32,7 @@ get git information of application
 
 ## API Endpoints
 
-#### POST `/test`
+#### POST `/xmlTest`
 
 ###### Required Headers
 
