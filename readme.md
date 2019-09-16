@@ -1,4 +1,4 @@
-ACMS Example REST Service
+Basic REST Service
 -
 
 This application is an example REST API that ACMS REST services can be modeled after. It includes several basic features of a modern production level REST service.
