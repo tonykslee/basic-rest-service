@@ -1,6 +1,6 @@
-package com.tmobile.cns.acms.testservice3.services;
+package com.tony.test.testservice3.services;
 
-import com.tmobile.cns.acms.testservice3.exceptions.BadRequestException;
+import com.tony.test.testservice3.exceptions.BadRequestException;
 import generated.XmlTestRequest;
 import generated.XmlTestResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
-import static com.tmobile.cns.acms.testservice3.utils.helpers.removeCountryCode;
+import static com.tony.test.testservice3.utils.helpers.removeCountryCode;
 
 /**
  * The type Test service.

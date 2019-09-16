@@ -1,9 +1,9 @@
-package com.tmobile.cns.acms.testservice3;
+package com.tony.test.testservice3;
 
-import com.tmobile.cns.acms.testservice3.configs.ApplicationProperties;
-import com.tmobile.cns.acms.testservice3.controllers.TestController;
-import com.tmobile.cns.acms.testservice3.exceptions.BadRequestException;
-import com.tmobile.cns.acms.testservice3.services.TestService;
+import com.tony.test.testservice3.configs.ApplicationProperties;
+import com.tony.test.testservice3.controllers.TestController;
+import com.tony.test.testservice3.exceptions.BadRequestException;
+import com.tony.test.testservice3.services.TestService;
 import generated.XmlTestRequest;
 import generated.XmlTestResponse;
 import lombok.extern.slf4j.Slf4j;

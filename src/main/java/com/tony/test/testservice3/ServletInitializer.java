@@ -1,4 +1,4 @@
-package com.tmobile.cns.acms.testservice3;
+package com.tony.test.testservice3;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

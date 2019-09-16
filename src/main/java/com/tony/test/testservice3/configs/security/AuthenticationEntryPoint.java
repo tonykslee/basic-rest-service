@@ -1,4 +1,4 @@
-package com.tmobile.cns.acms.testservice3.configs.security;
+package com.tony.test.testservice3.configs.security;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;

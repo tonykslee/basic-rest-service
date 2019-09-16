@@ -1,7 +1,7 @@
-package com.tmobile.cns.acms.testservice3.controllers;
+package com.tony.test.testservice3.controllers;
 
-import com.tmobile.cns.acms.testservice3.exceptions.BadRequestException;
-import com.tmobile.cns.acms.testservice3.services.TestService;
+import com.tony.test.testservice3.exceptions.BadRequestException;
+import com.tony.test.testservice3.services.TestService;
 import generated.XmlTestErrorResponse;
 import generated.XmlTestRequest;
 import generated.XmlTestResponse;

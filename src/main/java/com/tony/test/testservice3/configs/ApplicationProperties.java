@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.tmobile.cns.acms.testservice3.configs;
+package com.tony.test.testservice3.configs;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

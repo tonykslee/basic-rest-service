@@ -1,6 +1,6 @@
-package com.tmobile.cns.acms.testservice3.configs.security;
+package com.tony.test.testservice3.configs.security;
 
-import com.tmobile.cns.acms.testservice3.configs.ApplicationProperties;
+import com.tony.test.testservice3.configs.ApplicationProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
