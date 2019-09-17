@@ -28,7 +28,7 @@ public class PretendExternalApi {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "FAKE EXTERNAL API",
-            notes = "Do not use this endpoint as an example. The purpose of this endpoint is to replicate an external api.")
+            notes = "Enter a number below 11 and you will get a fail response. Otherwise Success response.")
     @ResponseBody
     public TestExternalResponse pretendExternalApi(@RequestBody TestExternalRequest request) {
         if (request.getRequestData() > 10) return new TestExternalResponse("Success", true);

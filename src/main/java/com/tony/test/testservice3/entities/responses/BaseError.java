@@ -5,10 +5,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
 @Data
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class BaseError {
     private String code;
     private String reason;

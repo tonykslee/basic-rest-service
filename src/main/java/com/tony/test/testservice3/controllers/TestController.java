@@ -4,7 +4,6 @@ import com.tony.test.testservice3.entities.BaseResponse;
 import com.tony.test.testservice3.entities.requests.TestExternalRequest;
 import com.tony.test.testservice3.entities.responses.BaseError;
 import com.tony.test.testservice3.entities.responses.TestExternalResponse;
-import com.tony.test.testservice3.entities.responses.TestResponse;
 import com.tony.test.testservice3.exceptions.BadRequestException;
 import com.tony.test.testservice3.exceptions.PretendExternalApiFailureException;
 import com.tony.test.testservice3.services.TestExternalService;
@@ -32,9 +31,10 @@ public class TestController {
 
     private TestExternalService testExternalService;
 
-    @ToString
+
     private class SuccessResponse extends BaseResponse<TestExternalResponse>{
         SuccessResponse(TestExternalResponse success, BaseError error) {super(success, error);}
+        @Override public String toString() { return super.toString(); }
     }
 
 
