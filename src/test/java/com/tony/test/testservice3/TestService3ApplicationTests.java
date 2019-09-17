@@ -2,22 +2,27 @@ package com.tony.test.testservice3;
 
 import com.tony.test.testservice3.configs.ApplicationProperties;
 import com.tony.test.testservice3.controllers.TestController;
-import com.tony.test.testservice3.entities.requests.TestRequest;
-import com.tony.test.testservice3.entities.responses.TestResponse;
+import com.tony.test.testservice3.entities.BaseResponse;
+import com.tony.test.testservice3.entities.requests.TestExternalRequest;
+import com.tony.test.testservice3.entities.responses.TestExternalResponse;
 import com.tony.test.testservice3.exceptions.BadRequestException;
+import com.tony.test.testservice3.exceptions.PretendExternalApiFailureException;
 import com.tony.test.testservice3.services.TestExternalService;
-import com.tony.test.testservice3.services.TestService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import static org.mockito.ArgumentMatchers.contains;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.client.RestTemplate;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.spy;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @Slf4j
 @RunWith(SpringRunner.class)
@@ -27,14 +32,14 @@ public class TestService3ApplicationTests {
     @Autowired
     ApplicationProperties properties;
     TestController testController;
-    TestService testService;
-    @Mock
     TestExternalService testExternalService;
+    @Mock
+    RestTemplate restTemplate;
 
     @Before
     public void setup() {
-        testService = spy(new TestService());
-        testController = spy(new TestController(testService, testExternalService));
+        testExternalService = spy(new TestExternalService(restTemplate));
+        testController = spy(new TestController(testExternalService));
 
     }
 
@@ -46,28 +51,27 @@ public class TestService3ApplicationTests {
     }
 
     @Test
-    public void testControllerSuccess10digit() throws BadRequestException {
-        TestRequest request = new TestRequest("1234567890");
-        TestResponse response = testController.executeTest(request);
-        assertEquals("Success", response.getStatus());
+    public void testControllerFail5() throws BadRequestException, PretendExternalApiFailureException {
+        TestExternalResponse expectedResponse = new TestExternalResponse("Fail", false);
+        doReturn(ResponseEntity.ok(expectedResponse)).when(restTemplate).exchange(contains("/external/api"), any(), any(), (Class<Object>) any());
+        TestExternalRequest request = new TestExternalRequest(5);
+        BaseResponse<TestExternalResponse> response = testController.executeTest(request);
+        assertEquals("Fail", response.getBody().getStatus());
     }
 
     @Test
-    public void testControllerSuccess11digit() throws BadRequestException {
-        TestRequest request = new TestRequest("11234567890");
-        TestResponse response = testController.executeTest(request);
-        assertEquals("Success", response.getStatus());
+    public void testControllerSuccess12() throws BadRequestException, PretendExternalApiFailureException {
+        TestExternalResponse expectedResponse = new TestExternalResponse("Success", true);
+        doReturn(ResponseEntity.ok(expectedResponse)).when(restTemplate).exchange(contains("/external/api"), any(), any(), (Class<Object>) any());
+        TestExternalRequest request = new TestExternalRequest(12);
+        BaseResponse<TestExternalResponse> response = testController.executeTest(request);
+        assertEquals("Success", response.getBody().getStatus());
     }
 
-    @Test(expected = NullPointerException.class)
-    public void testControllerFailNullRequest() throws BadRequestException {
-        TestRequest request = new TestRequest("");
-        testController.executeTest(request);
-    }
-
-    @Test(expected = BadRequestException.class)
-    public void testControllerFailBadRequest() throws BadRequestException {
-        TestRequest request = new TestRequest("123");
+    @Test(expected = PretendExternalApiFailureException.class)
+    public void testControllerFailNullRequest() throws BadRequestException, PretendExternalApiFailureException {
+        doThrow(new NullPointerException()).when(restTemplate).exchange(contains("/external/api"), any(), any(), (Class<Object>) any());
+        TestExternalRequest request = new TestExternalRequest(0);
         testController.executeTest(request);
     }
 

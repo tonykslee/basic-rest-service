@@ -1,6 +1,7 @@
 package com.tony.test.testservice3.exceptions.handler;
 
 
+import com.tony.test.testservice3.entities.BaseResponse;
 import com.tony.test.testservice3.entities.responses.BaseError;
 import com.tony.test.testservice3.exceptions.BadRequestException;
 import com.tony.test.testservice3.exceptions.PretendExternalApiFailureException;
@@ -30,10 +31,11 @@ public class TestExceptionHandler extends ResponseEntityExceptionHandler {
     @ResponseBody
     @ResponseStatus(BAD_REQUEST)
     @ExceptionHandler(value = {BadRequestException.class})
-    protected BaseError handleBadRequestException(BadRequestException ex) {
+    protected BaseResponse handleBadRequestException(BadRequestException ex) {
         BaseError baseError = new BaseError("4000", "Bad Request", ex.getMessage());
-        log.error("Returning Failure: {}", baseError);
-        return baseError;
+        BaseResponse br = new BaseResponse(null, baseError);
+        log.error("Returning Failure: {}", br);
+        return br;
     }
 
     /**
@@ -45,18 +47,20 @@ public class TestExceptionHandler extends ResponseEntityExceptionHandler {
     @ResponseBody
     @ResponseStatus(BAD_REQUEST)
     @ExceptionHandler(value = {NullPointerException.class})
-    protected BaseError handleNullRequestException(NullPointerException ex) {
+    protected BaseResponse handleNullRequestException(NullPointerException ex) {
         BaseError baseError = new BaseError("4001", "Null Request Field", ex.getMessage());
-        log.error("Returning Failure: {}", baseError);
-        return baseError;
+        BaseResponse br = new BaseResponse(null, baseError);
+        log.error("Returning Failure: {}", br);
+        return br;
     }
 
     @ResponseBody
     @ResponseStatus(INTERNAL_SERVER_ERROR)
     @ExceptionHandler(value = {PretendExternalApiFailureException.class})
-    protected BaseError handlePretendExternalApiFailureException(PretendExternalApiFailureException ex) {
+    protected BaseResponse handlePretendExternalApiFailureException(PretendExternalApiFailureException ex) {
         BaseError baseError = new BaseError("4002", "call to pretend external api failed", ex.getMessage());
-        log.error("Returning Failure: {}", baseError);
-        return baseError;
+        BaseResponse br = new BaseResponse(null, baseError);
+        log.error("Returning Failure: {}", br);
+        return br;
     }
 }

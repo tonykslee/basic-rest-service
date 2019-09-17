@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -19,7 +20,7 @@ import org.springframework.web.util.UriComponentsBuilder;
  * DO NOT CALL ENDPOINTS WITHIN THE SAME REST API!!! THIS IS BAD PRACTICE!!!
  */
 @Slf4j
-@Controller
+@Service
 public class TestExternalService {
 
     private RestTemplate restTemplate;
@@ -46,9 +47,15 @@ public class TestExternalService {
                 .path("/api")
                 .build().toUriString();
         log.info("Calling External API | URL: {} | Request Body: {}", url, request);
-        ResponseEntity<TestExternalResponse> response = restTemplate.exchange(url, HttpMethod.POST, createHttpEntity(request), TestExternalResponse.class);
 
-        if (response == null || !response.getStatusCode().is2xxSuccessful()) {
+        ResponseEntity<TestExternalResponse> response;
+        try {
+            response = restTemplate.exchange(url, HttpMethod.POST, createHttpEntity(request), TestExternalResponse.class);
+        } catch (NullPointerException e) {
+            log.error("External API Call failed with exception: {}", e.getMessage(), e);
+            throw new PretendExternalApiFailureException("API Call threw Null Pointer");
+        }
+        if (!response.getStatusCode().is2xxSuccessful()) {
             throw new PretendExternalApiFailureException(response.getBody().toString());
         }
         TestExternalResponse externalResponse = response.getBody();

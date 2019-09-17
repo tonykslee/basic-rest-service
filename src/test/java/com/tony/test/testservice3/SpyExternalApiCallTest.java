@@ -6,7 +6,6 @@ import com.tony.test.testservice3.entities.requests.TestExternalRequest;
 import com.tony.test.testservice3.entities.responses.TestExternalResponse;
 import com.tony.test.testservice3.exceptions.PretendExternalApiFailureException;
 import com.tony.test.testservice3.services.TestExternalService;
-import com.tony.test.testservice3.services.TestService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,15 +29,13 @@ public class SpyExternalApiCallTest {
     @Autowired
     ApplicationProperties properties;
     TestController testController;
-    TestService testService;
     TestExternalService testExternalService;
     @Mock RestTemplate mockRestTemplate;
 
     @Before
     public void setup() {
-        testService = spy(new TestService());
         testExternalService = spy(new TestExternalService(mockRestTemplate));
-        testController = spy(new TestController(testService, testExternalService));
+        testController = spy(new TestController(testExternalService));
     }
 
     @Test
