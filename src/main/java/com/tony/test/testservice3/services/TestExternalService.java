@@ -1,5 +1,7 @@
 package com.tony.test.testservice3.services;
 
+import com.tony.test.testservice3.controllers.TestController;
+import com.tony.test.testservice3.entities.SuccessResponse;
 import com.tony.test.testservice3.entities.requests.TestExternalRequest;
 import com.tony.test.testservice3.entities.responses.TestExternalResponse;
 import com.tony.test.testservice3.exceptions.PretendExternalApiFailureException;
@@ -36,7 +38,7 @@ public class TestExternalService {
      * @param request the request
      * @return the test external response
      */
-    public TestExternalResponse executeExternalTest(TestExternalRequest request) throws PretendExternalApiFailureException, NullPointerException {
+    public SuccessResponse executeExternalTest(TestExternalRequest request) throws PretendExternalApiFailureException, NullPointerException {
         if (request == null) throw new NullPointerException("Null External Request Body");
         long startTime = System.currentTimeMillis();
 
@@ -48,9 +50,9 @@ public class TestExternalService {
                 .build().toUriString();
         log.info("Calling External API | URL: {} | Request Body: {}", url, request);
 
-        ResponseEntity<TestExternalResponse> response;
+        ResponseEntity<SuccessResponse> response;
         try {
-            response = restTemplate.exchange(url, HttpMethod.POST, createHttpEntity(request), TestExternalResponse.class);
+            response = restTemplate.exchange(url, HttpMethod.POST, createHttpEntity(request), SuccessResponse.class);
         } catch (NullPointerException e) {
             log.error("External API Call failed with exception: {}", e.getMessage(), e);
             throw new PretendExternalApiFailureException("API Call threw Null Pointer");
@@ -58,7 +60,7 @@ public class TestExternalService {
         if (!response.getStatusCode().is2xxSuccessful()) {
             throw new PretendExternalApiFailureException(response.getBody().toString());
         }
-        TestExternalResponse externalResponse = response.getBody();
+        SuccessResponse externalResponse = response.getBody();
         log.info("{} {} | {}ms | External API Response Body: {}",
                 response.getStatusCodeValue(),
                 response.getStatusCode().getReasonPhrase(),

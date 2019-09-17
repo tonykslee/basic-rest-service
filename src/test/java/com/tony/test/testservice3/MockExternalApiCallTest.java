@@ -2,6 +2,7 @@ package com.tony.test.testservice3;
 
 import com.tony.test.testservice3.configs.ApplicationProperties;
 import com.tony.test.testservice3.controllers.TestController;
+import com.tony.test.testservice3.entities.SuccessResponse;
 import com.tony.test.testservice3.entities.requests.TestExternalRequest;
 import com.tony.test.testservice3.entities.responses.TestExternalResponse;
 import com.tony.test.testservice3.exceptions.PretendExternalApiFailureException;
@@ -39,10 +40,11 @@ public class MockExternalApiCallTest {
     @Test
     public void mockExternalApiService() throws PretendExternalApiFailureException {
         TestExternalResponse mockResponse = new TestExternalResponse("Success", true);
-        doReturn(mockResponse).when(testExternalService).executeExternalTest(any());
+
+        doReturn(new SuccessResponse(mockResponse, null)).when(testExternalService).executeExternalTest(any());
 
 
-        TestExternalResponse response = testController.executeTestExternalApiCall(new TestExternalRequest(11));
-        assertEquals("Success", response.getStatus());
+        SuccessResponse response = testController.executeTest(new TestExternalRequest(11));
+        assertEquals("Success", response.getBody().getStatus());
     }
 }

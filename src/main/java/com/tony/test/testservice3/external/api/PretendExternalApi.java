@@ -1,5 +1,7 @@
 package com.tony.test.testservice3.external.api;
 
+import com.tony.test.testservice3.controllers.TestController;
+import com.tony.test.testservice3.entities.SuccessResponse;
 import com.tony.test.testservice3.entities.requests.TestExternalRequest;
 import com.tony.test.testservice3.entities.responses.TestExternalResponse;
 import io.swagger.annotations.ApiOperation;
@@ -28,10 +30,13 @@ public class PretendExternalApi {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "FAKE EXTERNAL API",
-            notes = "Enter a number below 11 and you will get a fail response. Otherwise Success response.")
+            notes = "Enter a number below 11 and you will get a fail response. Otherwise Success response.",
+            response = SuccessResponse.class)
     @ResponseBody
-    public TestExternalResponse pretendExternalApi(@RequestBody TestExternalRequest request) {
-        if (request.getRequestData() > 10) return new TestExternalResponse("Success", true);
-        return new TestExternalResponse("Fail", false);
+    public SuccessResponse pretendExternalApi(@RequestBody TestExternalRequest request) {
+        TestExternalResponse response;
+        if (request.getRequestData() > 10) response = new TestExternalResponse("Success", true);
+        else response = new TestExternalResponse("Success", true);
+        return new SuccessResponse(response, null);
     }
 }

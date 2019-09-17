@@ -1,6 +1,7 @@
 package com.tony.test.testservice3.controllers;
 
 import com.tony.test.testservice3.entities.BaseResponse;
+import com.tony.test.testservice3.entities.SuccessResponse;
 import com.tony.test.testservice3.entities.requests.TestExternalRequest;
 import com.tony.test.testservice3.entities.responses.BaseError;
 import com.tony.test.testservice3.entities.responses.TestExternalResponse;
@@ -30,13 +31,6 @@ import java.util.UUID;
 public class TestController {
 
     private TestExternalService testExternalService;
-
-
-    private class SuccessResponse extends BaseResponse<TestExternalResponse>{
-        SuccessResponse(TestExternalResponse success, BaseError error) {super(success, error);}
-        @Override public String toString() { return super.toString(); }
-    }
-
 
     /**
      * Instantiates a new Test controller.
@@ -74,10 +68,9 @@ public class TestController {
         setupMDC("/test");
         log.info("Initial Request Body: {}", request);
 
-        TestExternalResponse response = testExternalService.executeExternalTest(request);
-        SuccessResponse successResponse = new SuccessResponse(response, null);
-        log.info("Returning Successful Response: {}", successResponse);
-        return successResponse;
+        SuccessResponse response = testExternalService.executeExternalTest(request);
+        log.info("Returning Successful Response: {}", response);
+        return response;
     }
 
     /**
@@ -104,35 +97,7 @@ public class TestController {
             throws NullPointerException, PretendExternalApiFailureException {
         setupMDC("/testWithoutAuth");
         log.info("Initial Request Body: {}", request);
-        TestExternalResponse response = testExternalService.executeExternalTest(request);
-        SuccessResponse successResponse = new SuccessResponse(response, null);
-        log.info("Returning Successful Response: {}", successResponse);
-        return successResponse;
-    }
-
-    /**
-     * Execute test that calls an external service.
-     *
-     * @param request the request
-     * @return the test response
-     * @throws PretendExternalApiFailureException the pretend external api failure exception
-     */
-    @PostMapping(value = "/testExternalApiCall",
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Execute test that calls an external api",
-            notes = "Send arbitrary number a response based on what number it is",
-            response = TestExternalResponse.class)
-    @ApiResponses(value = {
-            @ApiResponse(code = 400, message = "Null External Request Body", response = BaseError.class),
-            @ApiResponse(code = 500, message = "call to pretend external api failed", response = BaseError.class)})
-    @ResponseBody
-    public TestExternalResponse executeTestExternalApiCall(@RequestBody TestExternalRequest request)
-            throws PretendExternalApiFailureException, NullPointerException {
-        setupMDC("/testExternalApiCall");
-        log.info("Initial Request Body: {}", request);
-
-        TestExternalResponse response = testExternalService.executeExternalTest(request);
+        SuccessResponse response = testExternalService.executeExternalTest(request);
         log.info("Returning Successful Response: {}", response);
         return response;
     }

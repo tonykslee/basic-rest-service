@@ -3,6 +3,7 @@ package com.tony.test.testservice3;
 import com.tony.test.testservice3.configs.ApplicationProperties;
 import com.tony.test.testservice3.controllers.TestController;
 import com.tony.test.testservice3.entities.BaseResponse;
+import com.tony.test.testservice3.entities.SuccessResponse;
 import com.tony.test.testservice3.entities.requests.TestExternalRequest;
 import com.tony.test.testservice3.entities.responses.TestExternalResponse;
 import com.tony.test.testservice3.exceptions.BadRequestException;
@@ -53,18 +54,18 @@ public class TestService3ApplicationTests {
     @Test
     public void testControllerFail5() throws BadRequestException, PretendExternalApiFailureException {
         TestExternalResponse expectedResponse = new TestExternalResponse("Fail", false);
-        doReturn(ResponseEntity.ok(expectedResponse)).when(restTemplate).exchange(contains("/external/api"), any(), any(), (Class<Object>) any());
+        doReturn(ResponseEntity.ok(new SuccessResponse(expectedResponse, null))).when(restTemplate).exchange(contains("/external/api"), any(), any(), (Class<Object>) any());
         TestExternalRequest request = new TestExternalRequest(5);
-        BaseResponse<TestExternalResponse> response = testController.executeTest(request);
+        SuccessResponse response = testController.executeTest(request);
         assertEquals("Fail", response.getBody().getStatus());
     }
 
     @Test
     public void testControllerSuccess12() throws BadRequestException, PretendExternalApiFailureException {
         TestExternalResponse expectedResponse = new TestExternalResponse("Success", true);
-        doReturn(ResponseEntity.ok(expectedResponse)).when(restTemplate).exchange(contains("/external/api"), any(), any(), (Class<Object>) any());
+        doReturn(ResponseEntity.ok(new SuccessResponse(expectedResponse, null))).when(restTemplate).exchange(contains("/external/api"), any(), any(), (Class<Object>) any());
         TestExternalRequest request = new TestExternalRequest(12);
-        BaseResponse<TestExternalResponse> response = testController.executeTest(request);
+        SuccessResponse response = testController.executeTest(request);
         assertEquals("Success", response.getBody().getStatus());
     }
 
