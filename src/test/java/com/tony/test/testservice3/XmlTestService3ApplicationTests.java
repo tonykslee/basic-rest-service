@@ -7,7 +7,9 @@ import com.tony.test.testservice3.exceptions.PretendExternalApiFailureException;
 import com.tony.test.testservice3.services.TestExternalService;
 import com.tony.test.testservice3.external.api.XmlTestService;
 import generated.XmlTestBaseResponse;
+import generated.XmlTestErrorResponse;
 import generated.XmlTestRequest;
+import generated.XmlTestResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
@@ -60,7 +62,7 @@ public class XmlTestService3ApplicationTests {
         request.setMsisdn("1234567890");
 
         XmlTestBaseResponse baseResponse = new XmlTestBaseResponse();
-        XmlTestBaseResponse.XmlTestResponse testResponse = new XmlTestBaseResponse.XmlTestResponse();
+        XmlTestResponse testResponse = new XmlTestResponse();
         testResponse.setStatus("Success");
         baseResponse.setXmlTestResponse(testResponse);
         doReturn(ResponseEntity.ok(baseResponse))
@@ -77,7 +79,7 @@ public class XmlTestService3ApplicationTests {
         request.setMsisdn("11234567890");
 
         XmlTestBaseResponse baseResponse = new XmlTestBaseResponse();
-        XmlTestBaseResponse.XmlTestResponse testResponse = new XmlTestBaseResponse.XmlTestResponse();
+        XmlTestResponse testResponse = new XmlTestResponse();
         testResponse.setStatus("Success");
         baseResponse.setXmlTestResponse(testResponse);
         doReturn(ResponseEntity.ok(baseResponse))
@@ -105,7 +107,7 @@ public class XmlTestService3ApplicationTests {
         request.setMsisdn("123");
 
         XmlTestBaseResponse baseResponse = new XmlTestBaseResponse();
-        XmlTestBaseResponse.XmlTestErrorResponse errorResponse = new XmlTestBaseResponse.XmlTestErrorResponse();
+        XmlTestErrorResponse errorResponse = new XmlTestErrorResponse();
         errorResponse.setCode("4000");
         errorResponse.setReason("Bad Request");
         errorResponse.setExplanation("Bad Request");

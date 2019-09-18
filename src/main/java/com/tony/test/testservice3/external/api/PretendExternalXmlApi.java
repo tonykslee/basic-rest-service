@@ -3,6 +3,7 @@ package com.tony.test.testservice3.external.api;
 import com.tony.test.testservice3.exceptions.BadRequestException;
 import generated.XmlTestBaseResponse;
 import generated.XmlTestRequest;
+import generated.XmlTestResponse;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -60,7 +61,7 @@ public class PretendExternalXmlApi {
         setupMDC("/external/xml/api");
         log.info("Initial Request Body: {}", request);
 
-        XmlTestBaseResponse.XmlTestResponse response = xmlTestService.executeXmlTest(request);
+        XmlTestResponse response = xmlTestService.executeXmlTest(request);
         XmlTestBaseResponse baseResponse = new XmlTestBaseResponse();
         baseResponse.setXmlTestResponse(response);
         log.info("Returning Successful Response: {}", baseResponse);

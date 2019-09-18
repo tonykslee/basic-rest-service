@@ -5,6 +5,7 @@ import com.tony.test.testservice3.entities.responses.BaseError;
 import com.tony.test.testservice3.exceptions.BadRequestException;
 import com.tony.test.testservice3.exceptions.PretendExternalApiFailureException;
 import generated.XmlTestBaseResponse;
+import generated.XmlTestErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -33,7 +34,7 @@ public class TestExceptionHandler extends ResponseEntityExceptionHandler {
      * @param httpStatus the http status
      * @return the response entity
      */
-    public static ResponseEntity<XmlTestBaseResponse> buildFailResponse(XmlTestBaseResponse.XmlTestErrorResponse error, HttpStatus httpStatus) {
+    public static ResponseEntity<XmlTestBaseResponse> buildFailResponse(XmlTestErrorResponse error, HttpStatus httpStatus) {
         XmlTestBaseResponse baseResponse = new XmlTestBaseResponse();
         baseResponse.setXmlTestErrorResponse(error);
         ResponseEntity res = ResponseEntity
@@ -57,7 +58,7 @@ public class TestExceptionHandler extends ResponseEntityExceptionHandler {
     @ResponseStatus(value = BAD_REQUEST)
     @ExceptionHandler(value = {BadRequestException.class})
     protected ResponseEntity<XmlTestBaseResponse> handleBadRequestException(BadRequestException ex, WebRequest wr) {
-        XmlTestBaseResponse.XmlTestErrorResponse xmlTestErrorResponse = new XmlTestBaseResponse.XmlTestErrorResponse();
+        XmlTestErrorResponse xmlTestErrorResponse = new XmlTestErrorResponse();
         xmlTestErrorResponse.setCode("4000");
         xmlTestErrorResponse.setReason("Bad Request");
         xmlTestErrorResponse.setExplanation(ex.getMessage());
