@@ -1,7 +1,7 @@
 Basic REST Service
 -
 
-This application is an example REST API that ACMS REST services can be modeled after. It includes several basic features of a modern production level REST service.
+This application is an example REST API that REST services can be modeled after. It includes several basic features of a modern production level REST service.
 
 #### This branch features the most basic structure and framework for an average production level REST service
 
