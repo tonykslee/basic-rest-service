@@ -2,6 +2,7 @@ package com.tony.test.testservice3.exceptions.handler;
 
 
 import com.tony.test.testservice3.exceptions.BadRequestException;
+import generated.XmlTestBaseResponse;
 import generated.XmlTestErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -31,7 +32,7 @@ public class TestExceptionHandler extends ResponseEntityExceptionHandler {
      * @param httpStatus the http status
      * @return the response entity
      */
-    public static ResponseEntity<XmlTestErrorResponse> buildFailResponse(XmlTestErrorResponse error, HttpStatus httpStatus) {
+    public static ResponseEntity<XmlTestBaseResponse> buildFailResponse(XmlTestBaseResponse error, HttpStatus httpStatus) {
         ResponseEntity res = ResponseEntity
                 .status(httpStatus)
                 .contentType(MediaType.APPLICATION_XML)
@@ -48,11 +49,31 @@ public class TestExceptionHandler extends ResponseEntityExceptionHandler {
      */
     @ResponseStatus(value = BAD_REQUEST)
     @ExceptionHandler(value = {BadRequestException.class})
-    protected ResponseEntity<XmlTestErrorResponse> handleBadRequestException(BadRequestException ex, WebRequest wr) {
+    protected ResponseEntity<XmlTestBaseResponse> handleBadRequestException(BadRequestException ex) {
         XmlTestErrorResponse xmlTestErrorResponse = new XmlTestErrorResponse();
         xmlTestErrorResponse.setCode("4000");
         xmlTestErrorResponse.setReason("Bad Request");
         xmlTestErrorResponse.setExplanation(ex.getMessage());
-        return buildFailResponse(xmlTestErrorResponse, BAD_REQUEST);
+        XmlTestBaseResponse baseResponse = new XmlTestBaseResponse();
+        baseResponse.setXmlTestErrorResponse(xmlTestErrorResponse);
+        return buildFailResponse(baseResponse, BAD_REQUEST);
+    }
+
+    /**
+     * Handle bad request exception response entity.
+     *
+     * @param ex the ex
+     * @return the response entity
+     */
+    @ResponseStatus(value = BAD_REQUEST)
+    @ExceptionHandler(value = {NullPointerException.class})
+    protected ResponseEntity<XmlTestBaseResponse> handleNullException(NullPointerException ex) {
+        XmlTestErrorResponse xmlTestErrorResponse = new XmlTestErrorResponse();
+        xmlTestErrorResponse.setCode("4001");
+        xmlTestErrorResponse.setReason("null");
+        xmlTestErrorResponse.setExplanation(ex.getMessage());
+        XmlTestBaseResponse baseResponse = new XmlTestBaseResponse();
+        baseResponse.setXmlTestErrorResponse(xmlTestErrorResponse);
+        return buildFailResponse(baseResponse, BAD_REQUEST);
     }
 }

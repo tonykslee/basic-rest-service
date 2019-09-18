@@ -2,6 +2,7 @@ package com.tony.test.testservice3.controllers;
 
 import com.tony.test.testservice3.exceptions.BadRequestException;
 import com.tony.test.testservice3.services.TestService;
+import generated.XmlTestBaseResponse;
 import generated.XmlTestErrorResponse;
 import generated.XmlTestRequest;
 import generated.XmlTestResponse;
@@ -53,20 +54,22 @@ public class TestController {
             consumes = MediaType.APPLICATION_XML_VALUE)
     @ApiOperation(value = "Execute basic test api",
             notes = "Send arbitrary msisdn and receive an arbitrary response",
-            response = XmlTestResponse.class)
+            response = XmlTestBaseResponse.class)
     @ApiResponses(value = {
             @ApiResponse(code = 400, message =
                     "1. Empty msisdn\n" +
                             "2. Msisdn must be 10 or 11 digits long.",
-                    response = XmlTestErrorResponse.class)})
+                    response = XmlTestBaseResponse.class)})
     @ResponseBody
-    public XmlTestResponse executeTest(@RequestBody XmlTestRequest request) throws BadRequestException, NullPointerException {
+    public XmlTestBaseResponse executeTest(@RequestBody XmlTestRequest request) throws BadRequestException, NullPointerException {
         setupMDC("/test");
         log.info("Initial Request Body: {}", request);
 
         XmlTestResponse response = testService.executeTest(request);
-        log.info("Returning Successful Response: {}", response);
-        return response;
+        XmlTestBaseResponse baseResponse = new XmlTestBaseResponse();
+        baseResponse.setXmlTestResponse(response);
+        log.info("Returning Successful Response: {}", baseResponse);
+        return baseResponse;
     }
 
 

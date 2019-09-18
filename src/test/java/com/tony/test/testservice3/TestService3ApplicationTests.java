@@ -4,6 +4,7 @@ import com.tony.test.testservice3.configs.ApplicationProperties;
 import com.tony.test.testservice3.controllers.TestController;
 import com.tony.test.testservice3.exceptions.BadRequestException;
 import com.tony.test.testservice3.services.TestService;
+import generated.XmlTestBaseResponse;
 import generated.XmlTestRequest;
 import generated.XmlTestResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -45,16 +46,16 @@ public class TestService3ApplicationTests {
     public void testControllerSuccess10digit() throws BadRequestException {
         XmlTestRequest request = new XmlTestRequest();
         request.setMsisdn("1234567890");
-        XmlTestResponse response = testController.executeTest(request);
-        assertEquals("Success", response.getStatus());
+        XmlTestBaseResponse response = testController.executeTest(request);
+        assertEquals("Success", response.getXmlTestResponse().getStatus());
     }
 
     @Test
     public void testControllerSuccess11digit() throws BadRequestException {
         XmlTestRequest request = new XmlTestRequest();
         request.setMsisdn("11234567890");
-        XmlTestResponse response = testController.executeTest(request);
-        assertEquals("Success", response.getStatus());
+        XmlTestBaseResponse response = testController.executeTest(request);
+        assertEquals("Success", response.getXmlTestResponse().getStatus());
     }
 
     @Test(expected = NullPointerException.class)
