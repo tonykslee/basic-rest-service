@@ -1,7 +1,7 @@
 ACMS Example REST Service
 -
 
-This application is an example REST API that ACMS REST services can be modeled after. It includes several basic features of a modern production level REST service.
+This application is an example REST API that REST services can be modeled after. It includes several basic features of a modern production level REST service.
 
 #### This branch features an example of calling an external api and writing unit tests to mock the responses with mock and spy
 
@@ -70,7 +70,7 @@ Content-Type: application/json;charset=UTF-8
 Transfer-Encoding: chunked
 Date: Sun, 15 Sep 2019 08:11:18 GMT
 
-{"status":"Success"}
+{ "baseError": { "code": "string", "explanation": "string", "reason": "string" }, "body": { "status": "string", "validated": true } }
 ```
 
 ###### Request Body
@@ -83,17 +83,29 @@ Date: Sun, 15 Sep 2019 08:11:18 GMT
 ###### Response Body
 ```
 {
-    "status": "Success"
+  "baseError": {
+    "code": "string",
+    "explanation": "string",
+    "reason": "string"
+  },
+  "body": {
+    "status": "string",
+    "validated": true
+  }
 }
 ```
 
 ###### Failure Response
 ```
 {
-    "code": "String",
-    "reason": "String",
-    "explanation": "String"
+  "baseError": {
+    "code": "string",
+    "explanation": "string",
+    "reason": "string"
+  },
+  "body": {}
 }
+
 ```
 
 #### POST `/testWithoutAuth`
@@ -134,7 +146,7 @@ Content-Type: application/json;charset=UTF-8
 Transfer-Encoding: chunked
 Date: Sun, 15 Sep 2019 09:42:21 GMT
 
-{"status":"Success"}
+{ "baseError": { "code": "string", "explanation": "string", "reason": "string" }, "body": { "status": "string", "validated": true } }
 ```
 
 ###### Request Body
@@ -147,16 +159,28 @@ Date: Sun, 15 Sep 2019 09:42:21 GMT
 ###### Response Body
 ```
 {
-    "status": "Success"
+  "baseError": {
+    "code": "string",
+    "explanation": "string",
+    "reason": "string"
+  },
+  "body": {
+    "status": "string",
+    "validated": true
+  }
 }
 ```
 
 ###### Failure Response
 ```
 {
-    "code": "String",
-    "reason": "String",
-    "explanation": "String"
+  "baseError": {
+    "code": "string",
+    "explanation": "string",
+    "reason": "string"
+  },
+  "body": {}
 }
+
 ```
 
