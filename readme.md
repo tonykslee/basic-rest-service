@@ -71,7 +71,7 @@ Content-Type: application/json;charset=UTF-8
 Transfer-Encoding: chunked
 Date: Sun, 15 Sep 2019 08:11:18 GMT
 
-{"status":"Success"}
+{ "xmlTestErrorResponse": { "code": "string", "explanation": "string", "reason": "string" }, "xmlTestResponse": { "status": "string" } }
 ```
 
 ###### Request Body
@@ -84,16 +84,28 @@ Date: Sun, 15 Sep 2019 08:11:18 GMT
 ###### Response Body
 ```
 {
-    "status": "Success"
+  "xmlTestErrorResponse": {
+    "code": "string",
+    "explanation": "string",
+    "reason": "string"
+  },
+  "xmlTestResponse": {
+    "status": "string"
+  }
 }
 ```
 
 ###### Failure Response
 ```
 {
-    "code": "String",
-    "reason": "String",
-    "explanation": "String"
+  "xmlTestErrorResponse": {
+    "code": "string",
+    "explanation": "string",
+    "reason": "string"
+  },
+  "xmlTestResponse": {
+    "status": "string"
+  }
 }
 ```
 
@@ -136,7 +148,7 @@ curl -i -X POST \
         Transfer-Encoding: chunked
         Date: Sun, 15 Sep 2019 19:53:09 GMT
         
-        <?xml version="1.0" encoding="UTF-8" standalone="yes"?><XmlTestResponse><status>Success</status></XmlTestResponse>
+        <?xml version="1.0" encoding="UTF-8"?> <XmlTestBaseResponse> <XmlTestErrorResponse> <code>string</code> <explanation>string</explanation> <reason>string</reason> </XmlTestErrorResponse> <XmlTestResponse> <status>string</status> </XmlTestResponse> </XmlTestBaseResponse>
 
 ###### curl Fail Response
         HTTP/1.1 400
@@ -151,7 +163,7 @@ curl -i -X POST \
         Date: Sun, 15 Sep 2019 19:51:29 GMT
         Connection: close
         
-        <?xml version="1.0" encoding="UTF-8" standalone="yes"?><XmlTestErrorResponse><code>4000</code><reason>Bad Request</reason><explanation>Msisdn must be 10 or 11 digits long. Given msisdn: [123456789]</explanation></XmlTestErrorResponse>
+        <?xml version="1.0" encoding="UTF-8"?> <XmlTestBaseResponse> <XmlTestErrorResponse> <code>string</code> <explanation>string</explanation> <reason>string</reason> </XmlTestErrorResponse> <XmlTestResponse> <status>string</status> </XmlTestResponse> </XmlTestBaseResponse>
 
 ###### Request Body
 ```
@@ -164,18 +176,30 @@ curl -i -X POST \
 ###### Response Body
 ```
 <?xml version="1.0" encoding="UTF-8"?>
-<XmlTestResponse>
-	<status>string</status>
-</XmlTestResponse>
+<XmlTestBaseResponse>
+	<XmlTestErrorResponse>
+		<code>string</code>
+		<explanation>string</explanation>
+		<reason>string</reason>
+	</XmlTestErrorResponse>
+	<XmlTestResponse>
+		<status>string</status>
+	</XmlTestResponse>
+</XmlTestBaseResponse>
 ```
 
 ###### Failure Response
 ```
 <?xml version="1.0" encoding="UTF-8"?>
-<XmlTestErrorResponse>
-	<code>string</code>
-	<explanation>string</explanation>
-	<reason>string</reason>
-</XmlTestErrorResponse>
+<XmlTestBaseResponse>
+	<XmlTestErrorResponse>
+		<code>string</code>
+		<explanation>string</explanation>
+		<reason>string</reason>
+	</XmlTestErrorResponse>
+	<XmlTestResponse>
+		<status>string</status>
+	</XmlTestResponse>
+</XmlTestBaseResponse>
 ```
 
