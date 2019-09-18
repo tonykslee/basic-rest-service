@@ -15,6 +15,7 @@ These basic features include:
 7. Enabled Configuration Properties
 8. Custom Exception Handler for error handling
 9. Logback
+10. JaCoCo Test Coverage Plugin
 
 ## Instructions
 Please clone this repo to your run the code to see how it works. Play around with it! Experiment with all the above noted features to get a deeper understanding of how they work so that you can confidently implement them into your own code. 
