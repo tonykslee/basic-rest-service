@@ -15,6 +15,7 @@ These basic features include:
 7. Enabled Configuration Properties
 8. Custom Exception Handler for error handling
 9. Logback
+10. JaCoCo Test Coverage Plugin
 
 ## Instructions
 Please clone this repo to your run the code to see how it works. Play around with it! Experiment with all the above noted features to get a deeper understanding of how they work so that you can confidently implement them into your own code. 
@@ -83,16 +84,26 @@ Date: Sun, 15 Sep 2019 08:11:18 GMT
 ###### Response Body
 ```
 {
-    "status": "Success"
+  "baseError": {
+    "code": "string",
+    "explanation": "string",
+    "reason": "string"
+  },
+  "body": {
+    "status": "string"
+  }
 }
 ```
 
 ###### Failure Response
 ```
 {
-    "code": "String",
-    "reason": "String",
-    "explanation": "String"
+  "baseError": {
+    "code": "string",
+    "explanation": "string",
+    "reason": "string"
+  },
+  "body": {}
 }
 ```
 
@@ -134,7 +145,7 @@ Content-Type: application/json;charset=UTF-8
 Transfer-Encoding: chunked
 Date: Sun, 15 Sep 2019 09:42:21 GMT
 
-{"status":"Success"}
+{ "baseError": { "code": "string", "explanation": "string", "reason": "string" }, "body": { "status": "string" } }
 ```
 
 ###### Request Body
@@ -147,16 +158,26 @@ Date: Sun, 15 Sep 2019 09:42:21 GMT
 ###### Response Body
 ```
 {
-    "status": "Success"
+  "baseError": {
+    "code": "string",
+    "explanation": "string",
+    "reason": "string"
+  },
+  "body": {
+    "status": "string"
+  }
 }
 ```
 
 ###### Failure Response
 ```
 {
-    "code": "String",
-    "reason": "String",
-    "explanation": "String"
+  "baseError": {
+    "code": "string",
+    "explanation": "string",
+    "reason": "string"
+  },
+  "body": {}
 }
 ```
 

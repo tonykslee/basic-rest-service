@@ -3,7 +3,7 @@ package com.tony.test.testservice3;
 import com.tony.test.testservice3.configs.ApplicationProperties;
 import com.tony.test.testservice3.controllers.TestController;
 import com.tony.test.testservice3.entities.requests.TestRequest;
-import com.tony.test.testservice3.entities.responses.TestResponse;
+import com.tony.test.testservice3.entities.responses.SuccessResponse;
 import com.tony.test.testservice3.exceptions.BadRequestException;
 import com.tony.test.testservice3.services.TestService;
 import lombok.extern.slf4j.Slf4j;
@@ -44,15 +44,15 @@ public class TestService3ApplicationTests {
     @Test
     public void testControllerSuccess10digit() throws BadRequestException {
         TestRequest request = new TestRequest("1234567890");
-        TestResponse response = testController.executeTest(request);
-        assertEquals("Success", response.getStatus());
+        SuccessResponse response = testController.executeTest(request);
+        assertEquals("Success", response.getBody().getStatus());
     }
 
     @Test
     public void testControllerSuccess11digit() throws BadRequestException {
         TestRequest request = new TestRequest("11234567890");
-        TestResponse response = testController.executeTest(request);
-        assertEquals("Success", response.getStatus());
+        SuccessResponse response = testController.executeTest(request);
+        assertEquals("Success", response.getBody().getStatus());
     }
 
     @Test(expected = NullPointerException.class)

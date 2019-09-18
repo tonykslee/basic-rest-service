@@ -2,6 +2,7 @@ package com.tony.test.testservice3.exceptions.handler;
 
 
 import com.tony.test.testservice3.entities.responses.BaseError;
+import com.tony.test.testservice3.entities.responses.BaseResponse;
 import com.tony.test.testservice3.exceptions.BadRequestException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
+
 
 /**
  * The type Test exception handler.
@@ -28,9 +30,10 @@ public class TestExceptionHandler extends ResponseEntityExceptionHandler {
     @ResponseBody
     @ResponseStatus(BAD_REQUEST)
     @ExceptionHandler(value = {BadRequestException.class})
-    protected BaseError handleBadRequestException(BadRequestException ex) {
+    protected BaseResponse handleBadRequestException(BadRequestException ex) {
         BaseError baseError = new BaseError("4000", "Bad Request", ex.getMessage());
-        return baseError;
+        BaseResponse baseResponse = new BaseResponse(null, baseError);
+        return baseResponse;
     }
 
     /**
@@ -42,8 +45,9 @@ public class TestExceptionHandler extends ResponseEntityExceptionHandler {
     @ResponseBody
     @ResponseStatus(BAD_REQUEST)
     @ExceptionHandler(value = {NullPointerException.class})
-    protected BaseError handleNullRequestException(NullPointerException ex) {
+    protected BaseResponse handleNullRequestException(NullPointerException ex) {
         BaseError baseError = new BaseError("4001", "Null Request Field", ex.getMessage());
-        return baseError;
+        BaseResponse baseResponse = new BaseResponse(null, baseError);
+        return baseResponse;
     }
 }
