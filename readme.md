@@ -1,7 +1,7 @@
 ACMS Example REST Service
 -
 
-This application is an example REST API that ACMS REST services can be modeled after. It includes several basic features of a modern production level REST service.
+This application is an example REST API that REST services can be modeled after. It includes several basic features of a modern production level REST service.
 
 #### This Branch Features a call to an api that consumes/produces XML
 
