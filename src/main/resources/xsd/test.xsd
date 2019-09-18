@@ -7,6 +7,15 @@
         </xsd:complexType>
     </xsd:element>
 
+    <xsd:element name="XmlTestBaseResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="XmlTestResponse"/>
+                <xsd:element ref="XmlTestErrorResponse"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
     <xsd:element name="XmlTestResponse">
         <xsd:complexType>
             <xsd:sequence>
@@ -24,4 +33,5 @@
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
+
 </xsd:schema>
