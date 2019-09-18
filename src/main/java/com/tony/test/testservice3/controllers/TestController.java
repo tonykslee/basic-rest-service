@@ -52,18 +52,18 @@ public class TestController {
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Execute basic test api",
             notes = "Send arbitrary msisdn and receive an arbitrary response",
-            response = XmlTestBaseResponse.XmlTestResponse.class)
+            response = XmlTestBaseResponse.class)
     @ApiResponses(value = {
             @ApiResponse(code = 400, message =
                     "1. Empty msisdn\n" +
                             "2. Msisdn must be 10 or 11 digits long.",
-                    response = BaseError.class)})
+                    response = XmlTestBaseResponse.class)})
     @ResponseBody
-    public XmlTestBaseResponse.XmlTestResponse executeTest(@RequestBody XmlTestRequest request) throws NullPointerException, PretendExternalApiFailureException, BadRequestException {
+    public XmlTestBaseResponse executeTest(@RequestBody XmlTestRequest request) throws NullPointerException, PretendExternalApiFailureException, BadRequestException {
         setupMDC("/test");
         log.info("Initial Request Body: {}", request);
 
-        XmlTestBaseResponse.XmlTestResponse response = testExternalService.executeExternalTest(request);
+        XmlTestBaseResponse response = testExternalService.executeExternalTest(request);
         log.info("Returning Successful Response: {}", response);
         return response;
     }

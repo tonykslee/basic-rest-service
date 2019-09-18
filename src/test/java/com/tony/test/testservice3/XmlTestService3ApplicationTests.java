@@ -67,8 +67,8 @@ public class XmlTestService3ApplicationTests {
                 .when(restTemplate)
                 .exchange(contains("/external/xml/api"), any(), any(), (Class<Object>)any());
 
-        XmlTestBaseResponse.XmlTestResponse response = testController.executeTest(request);
-        assertEquals("Success", response.getStatus());
+        XmlTestBaseResponse response = testController.executeTest(request);
+        assertEquals("Success", response.getXmlTestResponse().getStatus());
     }
 
     @Test
@@ -84,8 +84,8 @@ public class XmlTestService3ApplicationTests {
                 .when(restTemplate)
                 .exchange(contains("/external/xml/api"), any(), any(), (Class<Object>)any());
 
-        XmlTestBaseResponse.XmlTestResponse response = testController.executeTest(request);
-        assertEquals("Success", response.getStatus());
+        XmlTestBaseResponse response = testController.executeTest(request);
+        assertEquals("Success", response.getXmlTestResponse().getStatus());
     }
 
     @Test(expected = PretendExternalApiFailureException.class)

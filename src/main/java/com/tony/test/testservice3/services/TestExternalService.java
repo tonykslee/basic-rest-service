@@ -33,7 +33,7 @@ public class TestExternalService {
      * @param request the request
      * @return the test external response
      */
-    public XmlTestBaseResponse.XmlTestResponse executeExternalTest(XmlTestRequest request) throws NullPointerException, PretendExternalApiFailureException, BadRequestException {
+    public XmlTestBaseResponse executeExternalTest(XmlTestRequest request) throws NullPointerException, PretendExternalApiFailureException, BadRequestException {
         if (request == null) throw new NullPointerException("Null External Request Body");
         long startTime = System.currentTimeMillis();
 
@@ -56,7 +56,7 @@ public class TestExternalService {
         if (!response.getStatusCode().is2xxSuccessful()) {
             throw new BadRequestException(response.getBody().getXmlTestErrorResponse().toString());
         }
-        XmlTestBaseResponse.XmlTestResponse externalResponse = response.getBody().getXmlTestResponse();
+        XmlTestBaseResponse externalResponse = response.getBody();
         log.info("{} {} | {}ms | External API Response Body: {}",
                 response.getStatusCodeValue(),
                 response.getStatusCode().getReasonPhrase(),

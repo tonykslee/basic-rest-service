@@ -1,4 +1,5 @@
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:toString="http://jaxb2-commons.dev.java.net/basic/toString">
     <xsd:element name="XmlTestRequest">
         <xsd:complexType>
             <xsd:sequence>
