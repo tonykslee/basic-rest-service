@@ -1,7 +1,7 @@
 ACMS Example REST Service
 -
 
-This application is an example REST API that ACMS REST services can be modeled after. It includes several basic features of a modern production level REST service.
+This application is an example REST API that REST services can be modeled after. It includes several basic features of a modern production level REST service.
 
 #### This Branch Features XML Request/Response handling
 
@@ -71,7 +71,7 @@ curl -i -X POST \
         Transfer-Encoding: chunked
         Date: Sun, 15 Sep 2019 19:53:09 GMT
         
-        <?xml version="1.0" encoding="UTF-8" standalone="yes"?><XmlTestResponse><status>Success</status></XmlTestResponse>
+        <?xml version="1.0" encoding="UTF-8"?> <XmlTestBaseResponse> <XmlTestErrorResponse> <code>string</code> <explanation>string</explanation> <reason>string</reason> </XmlTestErrorResponse> <XmlTestResponse> <status>string</status> </XmlTestResponse> </XmlTestBaseResponse>
 
 ###### curl Fail Response
         HTTP/1.1 400
@@ -86,7 +86,7 @@ curl -i -X POST \
         Date: Sun, 15 Sep 2019 19:51:29 GMT
         Connection: close
         
-        <?xml version="1.0" encoding="UTF-8" standalone="yes"?><XmlTestErrorResponse><code>4000</code><reason>Bad Request</reason><explanation>Msisdn must be 10 or 11 digits long. Given msisdn: [123456789]</explanation></XmlTestErrorResponse>
+        <?xml version="1.0" encoding="UTF-8"?> <XmlTestBaseResponse> <XmlTestErrorResponse> <code>string</code> <explanation>string</explanation> <reason>string</reason> </XmlTestErrorResponse> <XmlTestResponse> <status>string</status> </XmlTestResponse> </XmlTestBaseResponse>
 
 ###### Request Body
 ```
@@ -99,18 +99,30 @@ curl -i -X POST \
 ###### Response Body
 ```
 <?xml version="1.0" encoding="UTF-8"?>
-<XmlTestResponse>
-	<status>string</status>
-</XmlTestResponse>
+<XmlTestBaseResponse>
+	<XmlTestErrorResponse>
+		<code>string</code>
+		<explanation>string</explanation>
+		<reason>string</reason>
+	</XmlTestErrorResponse>
+	<XmlTestResponse>
+		<status>string</status>
+	</XmlTestResponse>
+</XmlTestBaseResponse>
 ```
 
 ###### Failure Response
 ```
 <?xml version="1.0" encoding="UTF-8"?>
-<XmlTestErrorResponse>
-	<code>string</code>
-	<explanation>string</explanation>
-	<reason>string</reason>
-</XmlTestErrorResponse>
+<XmlTestBaseResponse>
+	<XmlTestErrorResponse>
+		<code>string</code>
+		<explanation>string</explanation>
+		<reason>string</reason>
+	</XmlTestErrorResponse>
+	<XmlTestResponse>
+		<status>string</status>
+	</XmlTestResponse>
+</XmlTestBaseResponse>
 ```
 
