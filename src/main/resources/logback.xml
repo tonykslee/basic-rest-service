@@ -1,7 +1,7 @@
 <configuration>
     <property name="applicationName" value="Test Service 3"/>
     <property name="applicationLogName" value="test_service_3"/>
-    <property name="logPattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS, PST} %-5level - %logger{36}\\(%line\\) - ACMS | ${applicationName} | %X{method} | %X{transactionId} | %X{workflow} \n  -| %msg%n"/>
+    <property name="logPattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS, PST} %-5level - %logger{36}\\(%line\\) - Example Platform | ${applicationName} | %X{method} | %X{transactionId} | %X{workflow} \n  -| %msg%n"/>
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>${logPattern}</pattern>

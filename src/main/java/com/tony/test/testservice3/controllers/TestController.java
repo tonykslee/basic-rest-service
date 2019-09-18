@@ -51,7 +51,7 @@ public class TestController {
      */
     @PostMapping(value = "/test",
             produces = MediaType.APPLICATION_XML_VALUE,
-            consumes = MediaType.APPLICATION_XML_VALUE)
+            consumes = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
     @ApiOperation(value = "Execute basic test api",
             notes = "Send arbitrary msisdn and receive an arbitrary response",
             response = XmlTestBaseResponse.class)
@@ -81,7 +81,7 @@ public class TestController {
     private void setupMDC(String method) {
         MDC.clear();
         MDC.put("method", method);
-        MDC.put("workflow", "ACMS Example");
+        MDC.put("workflow", "Example Flow");
         MDC.put("transactionId", UUID.randomUUID().toString());
     }
 }
